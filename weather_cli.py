@@ -1,10 +1,19 @@
+filename="history.json"
 import requests
 import json
 import sys
 from datetime import datetime, timezone
+from dotenv import load_dotenv
+import os
 
-# Your OpenWeatherMap API key
-API_KEY = "c907de9b456a2d25422094b0472d18ac"
+load_dotenv()
+
+API_KEY = os.getenv("OPENWEATHER_API_KEY")
+if not API_KEY:
+    print("Error: OPENWEATHER_API_KEY environment variable not set.")
+    exit(1)
+
+
 
 def get_weather(city: str) -> dict:
     url = "https://api.openweathermap.org/data/2.5/weather"
